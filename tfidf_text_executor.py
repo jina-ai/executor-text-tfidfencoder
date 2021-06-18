@@ -1,6 +1,6 @@
 import os
 
-from jina import Executor, requests, DocumentArray, Document
+from jina import Executor, requests, DocumentArray
 
 
 cur_dir = os.path.dirname(os.path.abspath(__file__))
