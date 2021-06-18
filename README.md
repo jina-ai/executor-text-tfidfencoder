@@ -1,3 +1,7 @@
+<p align="center">
+<img src="https://github.com/jina-ai/jina/blob/master/.github/logo-only.gif?raw=true" alt="Jina banner" width="200px">
+</p>
+
 # TFIDFTextEncoder
 
 
@@ -7,6 +11,18 @@ The `TFIDFTextEncoder` class wraps the text embedding functionality of a TFIDF m
 The TFIDF model is a classic vector representation for [information retrieval](https://en.wikipedia.org/wiki/Tf–idf).
 
 `TfidfTextEncoder` encodes data from a `DocumentArray` and updates the `doc.embedding` attributes with a  `scipy.csr_matrix`of floating point values for each doc in DocumentArray.
+
+
+
+
+
+### Inputs
+
+[Documents](https://github.com/jina-ai/jina/blob/master/.github/2.0/cookbooks/Document.md) with `text`. By default, the input `text`must be a unicode string.  
+
+### Returns
+
+[Documents](https://github.com/jina-ai/jina/blob/master/.github/2.0/cookbooks/Document.md) with `embedding` fields filled with an `scipy.sparse.csr_matrix` of the shape `n_vocabulary`..
 
 
 
