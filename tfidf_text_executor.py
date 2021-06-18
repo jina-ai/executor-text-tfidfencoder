@@ -34,5 +34,3 @@ class TFIDFTextEncoder(Executor):
 
         for doc, doc_embedding in zip(docs, embedding_matrix):
             doc.embedding = doc_embedding
-
-
