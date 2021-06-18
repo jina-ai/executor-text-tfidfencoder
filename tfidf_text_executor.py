@@ -1,7 +1,7 @@
 import os
 
 from jina import Executor, requests, DocumentArray
-
+from jina.excepts import PretrainedModelFileDoesNotExist
 
 cur_dir = os.path.dirname(os.path.abspath(__file__))
 
