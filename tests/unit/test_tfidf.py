@@ -3,7 +3,12 @@ import numpy as np
 import scipy
 
 from jina import Executor, Document, DocumentArray
-from tfidf_text_executor import TFIDFTextEncoder
+
+try:
+    from tfidf_text_executor import TFIDFTextEncoder
+except:
+    from jinahub.encoders.nlp.tfidf_text_executor import TFIDFTextEncoder
+
 
 
 cur_dir = os.path.dirname(os.path.abspath(__file__))
