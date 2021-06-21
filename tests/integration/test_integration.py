@@ -20,3 +20,4 @@ def test_flow_generates_embedding():
     assert responses[0].docs[0].embedding is not None
     # input has 4 different words
     assert responses[0].docs[0].embedding.nnz == 4
+    
