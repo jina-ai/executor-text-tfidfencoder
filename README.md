@@ -67,7 +67,7 @@ Use the prebuilt images from JinaHub in your python codes,
 ```python
 from jina import Flow
 	
-f = Flow().add(uses='jinahub+docker://MyDummyExecutor')
+f = Flow().add(uses='jinahub+docker://TFIDFTextEncoder')
 ```
 
 or in the `.yml` config.
@@ -100,13 +100,13 @@ pods:
 
 ### 📦️ Via Pypi
 
-1. Install the `jinahub-TFIDFTextEncoder` package.
+1. Install the `jinahub-executor-text-tfidfencoder` package.
 
 	```bash
 	pip install git+https://github.com/jina-ai/executor-text-tfidfencoder.git
 	```
 
-1. Use `jinahub-MY-DUMMY-EXECUTOR` in your code
+1. Use `jinahub-executor-text-tfidfencoder` in your code
 
 	```python
 	from jina import Flow
@@ -126,7 +126,7 @@ pods:
 	docker build -t executor-text-tfidfencoder-image .
 	```
 
-1. Use `my-dummy-executor-image` in your codes
+1. Use `executor-text-tfidfencoder` in your code
 
 	```python
 	from jina import Flow
