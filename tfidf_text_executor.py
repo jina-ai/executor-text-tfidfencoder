@@ -19,21 +19,21 @@ class TFIDFTextEncoder(Executor):
 
     :param path_vectorizer: path of the pre-trained tfidf sklearn vectorizer
     :param default_batch_size: fallback traversal path in case there is not traversal path sent in the request
-    :param default_traversal_path: fallback batch size in case there is not batch size sent in the request
+    :param default_traversal_paths: fallback batch size in case there is not batch size sent in the request
     """
 
     def __init__(
         self,
         path_vectorizer: str = os.path.join(cur_dir, 'model/tfidf_vectorizer.pickle'),
         default_batch_size: int = 2048,
-        default_traversal_path: str = 'r',
+        default_traversal_paths: str = 'r',
         *args,
         **kwargs,
     ):
         super().__init__(*args, **kwargs)
         self.path_vectorizer = path_vectorizer
         self.default_batch_size = default_batch_size
-        self.default_traversal_path = default_traversal_path
+        self.default_traversal_paths = default_traversal_paths
 
         if os.path.exists(self.path_vectorizer):
             self.tfidf_vectorizer = pickle.load(open(self.path_vectorizer, 'rb'))
@@ -59,11 +59,11 @@ class TFIDFTextEncoder(Executor):
     def _get_input_data_generator(self, docs: DocumentArray, parameters: dict):
         """Create a batch generator to iterate over text in a document (or document chunks)."""
 
-        traversal_path = parameters.get('traversal_path', self.default_traversal_path)
+        traversal_paths = parameters.get('traversal_paths', self.default_traversal_paths)
         batch_size = parameters.get('batch_size', self.default_batch_size)
 
         # traverse thought all documents which have to be processed
-        flat_docs = docs.traverse_flat(traversal_path)
+        flat_docs = docs.traverse_flat(traversal_paths)
 
         # filter out documents without images
         filtered_docs = DocumentArray([doc for doc in flat_docs if doc.text is not None])
