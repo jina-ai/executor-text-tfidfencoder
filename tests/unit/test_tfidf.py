@@ -7,7 +7,7 @@ from jina import Executor, Document, DocumentArray
 try:
     from tfidf_text_executor import TFIDFTextEncoder
 except:
-    from jinahub.encoders.nlp.tfidf_text_executor import TFIDFTextEncoder
+    from jinahub.encoder.tfidf_text_executor import TFIDFTextEncoder
 
 
 

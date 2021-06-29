@@ -6,7 +6,7 @@ from jina import Flow, Document, DocumentArray
 try:
     from tfidf_text_executor import TFIDFTextEncoder
 except:
-    from jinahub.encoders.nlp.tfidf_text_executor import TFIDFTextEncoder
+    from jinahub.encoder.tfidf_text_executor import TFIDFTextEncoder
 
 cur_dir = os.path.dirname(os.path.abspath(__file__))
 

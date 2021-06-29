@@ -110,7 +110,7 @@ pods:
 
 	```python
 	from jina import Flow
-	from jinahub.encoder.executor-text-tfidfencoder import TFIDFTextEncoder
+	from jinahub.encoder.tfidf_text_executor import TFIDFTextEncoder
 	
 	f = Flow().add(uses=TFIDFTextEncoder)
 	```
