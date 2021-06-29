@@ -145,7 +145,7 @@ from jina import Flow, Document
 f = Flow().add(uses='jinahub+docker://TFIDFTextEncoder')
 
 with f:
-    resp = f.post(inputs=Document(text='Han eats pizza'), return_resutls=True)
+    resp = f.index(inputs=Document(text='Han eats pizza'), return_results=True)
 	print(f'{resp}')
 ```
 
