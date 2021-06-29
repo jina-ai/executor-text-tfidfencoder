@@ -1,5 +1,5 @@
 manifest_version: 1
-name: Tfidf Text Encoder
+name: TFIDFTextEncoder
 alias: TFIDFTextEncoder
 description: |
     `TFIDFTextEncoder` encodes data from a with a TFIDF feature representation.

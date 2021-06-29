@@ -1,3 +1,4 @@
+jina==2.0.0rc10
 scikit-learn==0.24
 pytest==6.2.4
 
