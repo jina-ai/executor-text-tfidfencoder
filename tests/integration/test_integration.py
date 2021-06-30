@@ -1,11 +1,7 @@
 import os
 
 from jina import Flow, Document, DocumentArray
-
-try:
-    from tfidf_text_executor import TFIDFTextEncoder
-except:
-    from jinahub.encoder.tfidf_text_executor import TFIDFTextEncoder
+from jinahub.encoder.tfidf_text_executor import TFIDFTextEncoder  # is implicitly required
 
 cur_dir = os.path.dirname(os.path.abspath(__file__))
 
