@@ -1,2 +1,2 @@
-jina==2.0.0rc10
+jina==2.0.0
 scikit-learn==0.24.1
