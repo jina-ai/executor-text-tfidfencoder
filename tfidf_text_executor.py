@@ -26,14 +26,14 @@ class TFIDFTextEncoder(Executor):
         self,
         path_vectorizer: str = os.path.join(cur_dir, 'model/tfidf_vectorizer.pickle'),
         default_batch_size: int = 2048,
-        default_traversal_paths: str = 'r',
+        default_traversal_paths: Optional[str] = None,
         *args,
         **kwargs,
     ):
         super().__init__(*args, **kwargs)
         self.path_vectorizer = path_vectorizer
         self.default_batch_size = default_batch_size
-        self.default_traversal_paths = default_traversal_paths
+        self.default_traversal_paths = default_traversal_paths or ['r']
 
         if os.path.exists(self.path_vectorizer):
             self.tfidf_vectorizer = pickle.load(open(self.path_vectorizer, 'rb'))

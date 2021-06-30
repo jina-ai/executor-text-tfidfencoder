@@ -1,4 +1,3 @@
-import pytest
 import os
 
 from jina import Flow, Document, DocumentArray
@@ -10,9 +9,9 @@ except:
 
 cur_dir = os.path.dirname(os.path.abspath(__file__))
 
-def test_flow_generates_embedding():
 
-    doc = DocumentArray([Document(text = 'Han likes eating pizza')])
+def test_flow_generates_embedding():
+    doc = DocumentArray([Document(text='Han likes eating pizza')])
 
     with Flow.load_config(os.path.join(cur_dir, 'flow.yml')) as f:
         responses = f.index(inputs=doc, return_results=True)

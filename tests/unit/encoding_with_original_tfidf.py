@@ -1,6 +1,4 @@
 import os
-import numpy as np
-import sklearn
 import scipy
 
 cur_dir = os.path.dirname(os.path.abspath(__file__))
@@ -19,12 +17,12 @@ if __name__ == '__main__':
     X = load_data()
     tfidf_vectorizer.fit(X)
 
-    ### Encoding a single item
+    # Encoding a single item
     text = ['Han likes eating pizza']
-    embeddeding_array = tfidf_vectorizer.transform(text)
-    scipy.sparse.save_npz('expected.npz', embeddeding_array)
+    embedding_array = tfidf_vectorizer.transform(text)
+    scipy.sparse.save_npz(os.path.join(cur_dir, 'expected.npz'), embedding_array)
 
-    ### Encoding a batch
+    # Encoding a batch
     text = ['Han likes eating pizza', 'Han likes pizza', 'Jina rocks']
     embedding_batch = tfidf_vectorizer.transform(text)
-    scipy.sparse.save_npz('expected_batch.npz', embedding_batch)
+    scipy.sparse.save_npz(os.path.join(cur_dir, 'expected_batch.npz'), embedding_batch)
