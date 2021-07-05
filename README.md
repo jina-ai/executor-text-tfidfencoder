@@ -35,6 +35,16 @@ The TFIDF model is a classic vector representation for [information retrieval](h
 
 You need a TF-IDF vectorizer pretrained.
 
+To install the dependencies locally run 
+```
+pip install . 
+pip install -r tests/requirements.txt
+```
+To verify the installation works:
+```
+pytest tests
+```
+
 ### Pretraining a TF-IDF Vectorizer
 
 The `TFIDFTextEncoder`  uses a `sklearn.feature_extraction.text.TfidfVectorizer`object that needs to be fitted and stored as a pickle object which the `TFIDFTextEncoder` will load from `path_vectorizer`. By default `path_vectorizer='model/tfidf_vectorizer.pickle'` .
