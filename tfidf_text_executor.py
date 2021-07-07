@@ -1,6 +1,6 @@
 import os
 import pickle
-from typing import Optional, Iterable, Any, List
+from typing import Optional, Iterable, Any, List, Tuple
 
 from jina import Executor, requests, DocumentArray
 from jina.excepts import PretrainedModelFileDoesNotExist
@@ -12,22 +12,22 @@ class TFIDFTextEncoder(Executor):
     Encode text into tf-idf sparse embeddings
 
     :param path_vectorizer: path of the pre-trained tfidf sklearn vectorizer
-    :param default_batch_size: fallback traversal path in case there is not traversal path sent in the request
-    :param default_traversal_paths: fallback batch size in case there is not batch size sent in the request
+    :param default_traversal_paths: fallback traversal path in case there is not traversal path sent in the request
+    :param default_batch_size: fallback batch size in case there is not batch size sent in the request
     """
 
     def __init__(
         self,
         path_vectorizer: str = 'model/tfidf_vectorizer.pickle',
         default_batch_size: int = 2048,
-        default_traversal_paths: Optional[str] = None,
+        default_traversal_paths: Tuple[str] = ('r', ),
         *args,
         **kwargs,
     ):
         super().__init__(*args, **kwargs)
         self.path_vectorizer = path_vectorizer
         self.default_batch_size = default_batch_size
-        self.default_traversal_paths = default_traversal_paths or ['r']
+        self.default_traversal_paths = default_traversal_paths
 
         if os.path.exists(self.path_vectorizer):
             self.tfidf_vectorizer = pickle.load(open(self.path_vectorizer, 'rb'))
