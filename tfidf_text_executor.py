@@ -6,13 +6,15 @@ from jina import Executor, requests, DocumentArray
 from jina.excepts import PretrainedModelFileDoesNotExist
 from jina_commons.batching import get_docs_batch_generator
 
+import warnings
 
 class TFIDFTextEncoder(Executor):
     """
     Encode text into tf-idf sparse embeddings
 
     :param path_vectorizer: path of the pre-trained tfidf sklearn vectorizer
-    :param default_traversal_paths: fallback traversal path in case there is not traversal path sent in the request
+    :param default_access_paths: fallback traversal path in case there is not traversal path sent in the request
+    :param default_traversal_paths: please use default_access_paths
     :param default_batch_size: fallback batch size in case there is not batch size sent in the request
     """
 
@@ -20,14 +22,21 @@ class TFIDFTextEncoder(Executor):
         self,
         path_vectorizer: str = 'model/tfidf_vectorizer.pickle',
         default_batch_size: int = 2048,
-        default_traversal_paths: Tuple[str] = ('r', ),
+        default_access_paths: Tuple[str] = ('r', ),
+        default_traversal_paths: Optional[Tuple[str]] = None,
         *args,
         **kwargs,
     ):
         super().__init__(*args, **kwargs)
         self.path_vectorizer = path_vectorizer
         self.default_batch_size = default_batch_size
-        self.default_traversal_paths = default_traversal_paths
+        if default_traversal_paths is not None:
+            self.default_access_paths = default_traversal_paths
+            warnings.warn("'default_traversal_paths' will be deprecated in the future, please use 'default_access_paths'.",
+                          DeprecationWarning,
+                          stacklevel=2)
+        else:
+            self.default_access_paths = default_access_paths
 
         if os.path.exists(self.path_vectorizer):
             self.tfidf_vectorizer = pickle.load(open(self.path_vectorizer, 'rb'))
@@ -43,15 +52,15 @@ class TFIDFTextEncoder(Executor):
 
         :param docs: documents sent to the encoder. The docs must have `text`.
             By default, the input `text` must be a `list` of `str`.
-        :param parameters: dictionary to define the `traversal_paths` and the `batch_size`. For example,
-               `parameters={'traversal_paths': ['r'], 'batch_size': 10}`.
+        :param parameters: dictionary to define the `access_paths` and the `batch_size`. For example,
+               `parameters={'access_paths': ['r'], 'batch_size': 10}`.
         :param kwargs: Additional key value arguments.
         """
 
         if docs:
             document_batches_generator = get_docs_batch_generator(
                 docs,
-                traversal_path=parameters.get('traversal_paths', self.default_traversal_paths),
+                traversal_path=parameters.get('access_paths', self.default_access_paths),
                 batch_size=parameters.get('batch_size', self.default_batch_size),
                 needs_attr='text'
             )
